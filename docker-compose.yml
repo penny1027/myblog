@@ -1,0 +1,30 @@
+version: '3.3'
+
+services:
+   db:
+     image: mysql:5.7
+     volumes:
+       - ./mysqldata:/var/lib/mysql
+     restart: always
+     ports:
+       - 3306:3306
+     environment:
+       MYSQL_ROOT_PASSWORD: somewordpress
+       MYSQL_DATABASE: wordpress        # 数据库名
+       MYSQL_USER: admin        # 数据库用户名
+       MYSQL_PASSWORD: 12!panjuan     # 数据库密码
+
+   wordpress:
+     depends_on:
+       - db
+     image: wordpress:latest
+     volumes:
+       - ./htmldata:/var/www/html
+     ports:
+       - 80:80
+     restart: always
+     environment:
+       WORDPRESS_DB_HOST: db:3306
+       WORDPRESS_DB_USER: admin # 数据库用户名
+       WORDPRESS_DB_PASSWORD: 12!panjuan       # 数据库密码
+       WORDPRESS_DB_NAME: wordpress     # 数据库名
