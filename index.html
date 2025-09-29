@@ -1,350 +1,301 @@
+
 <!DOCTYPE html>
-<html lang="en">
-   <head>
-      <!-- basic -->
-      <meta charset="utf-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <!-- mobile metas -->
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-      <!-- site metas -->
-      <title>Blog</title>
-      <meta name="keywords" content="">
-      <meta name="description" content="">
-      <meta name="author" content="">
-      <!-- bootstrap css -->
-      <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-      <!-- style css -->
-      <link rel="stylesheet" type="text/css" href="css/style.css">
-      <!-- Responsive-->
-      <link rel="stylesheet" href="css/responsive.css">
-      <!-- fevicon -->
-      <!-- <link rel="icon" href="images/fevicon.png" type="image/gif" /> -->
-      <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
-      <!-- Scrollbar Custom CSS -->
-      <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
-      <!-- Tweaks for older IEs-->
-      <link rel="stylesheet" href="css/font-awesome.css">
-      <!-- owl stylesheets --> 
-      <link rel="stylesheet" href="css/owl.carousel.min.css">
-      <link rel="stylesheet" href="css/owl.theme.default.min.css">
-      <link rel="stylesheet" href="css/jquery.fancybox.min.css" media="screen">
-   </head>
-   <body>
-      <!--header section start -->
-      <div class="header_section">
-         <div class="container-fluid">
-               <div class="main">
-                  <div class="logo"><a href="index.html"><img src="images/logo.png"></a></div>
-                  <div class="menu_text">
-                     <ul>
-                        <div class="togle_">
-                           <div class="menu_main">
-                              <ul>
-                                 <li><a href="#">Login</a></li>
-                                 <li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>
-                              </ul>
-                           </div>
-                        </div>
-                        <div id="myNav" class="overlay">
-                           <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-                           <div class="overlay-content">
-                              <a href="index.html">Home</a>
-                              <a href="protect.html">Protect</a>
-                              <a href="about.html">About</a>
-                              <a href="doctors.html">Doctors</a>
-                              <a href="news.html">News</a>
-                           </div>
-                        </div>
-                        <span class="navbar-toggler-icon"></span>
-                        <span onclick="openNav()"><img src="images/toogle-icon.png" class="toggle_menu"></span>
-                        <span onclick="openNav()"><img src="images/toogle-icon1.png" class="toggle_menu_1"></span>
-                     </ul>
-                  </div>
-               </div>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>运维技术博客 - Linux/DevOps技术分享</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .server-status {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+        }
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+        }
+        .animate-pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- 导航栏 -->
+    <nav class="bg-gray-900 text-white shadow-xl">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-server text-blue-400 text-2xl"></i>
+                    <a href="#" class="text-xl font-bold">运维技术博客</a>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="hover:text-blue-400"><i class="fas fa-home mr-1"></i>首页</a>
+                    <a href="#" class="hover:text-blue-400"><i class="fas fa-book mr-1"></i>技术文章</a>
+                    <a href="#" class="hover:text-blue-400"><i class="fas fa-tools mr-1"></i>运维工具</a>
+                    <a href="#" class="hover:text-blue-400"><i class="fas fa-chart-line mr-1"></i>监控案例</a>
+                    <a href="about.html" class="hover:text-blue-400"><i class="fas fa-user mr-1"></i>关于我</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-white focus:outline-none">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
             </div>
-      <!-- banner section start -->
-      <div class="banner_section layout_padding">
-         <div class="container">
-            <div id="my_slider" class="carousel slide" data-ride="carousel">
-               <div class="carousel-inner">
-                  <div class="carousel-item active">
-                     <div class="row">
-                        <div class="col-md-6">
-                           <div class="container">
-                              <h1 class="banner_taital">Get Medical Care early</h1>
-                              <p class="banner_text">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form.</p>
-                              <div class="more_bt"><a href="#">Read More</a></div>
-                           </div>
-                        </div>
-                        <div class="col-md-6">
-                           <div class="banner_img"><img src="images/banner-img.png"></div>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="carousel-item">
-                     <div class="row">
-                        <div class="col-md-6">
-                           <div class="container">
-                              <h1 class="banner_taital">Get Medical Care early</h1>
-                              <p class="banner_text">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form.</p>
-                              <div class="more_bt"><a href="#">Read More</a></div>
-                           </div>
-                        </div>
-                        <div class="col-md-6">
-                           <div class="banner_img"><img src="images/banner-img.png"></div>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="carousel-item">
-                     <div class="row">
-                        <div class="col-md-6">
-                           <div class="container">
-                              <h1 class="banner_taital">Get Medical Care early</h1>
-                              <p class="banner_text">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form.</p>
-                              <div class="more_bt"><a href="#">Read More</a></div>
-                           </div>
-                        </div>
-                        <div class="col-md-6">
-                           <div class="banner_img"><img src="images/banner-img.png"></div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <a class="carousel-control-prev" href="#my_slider" role="button" data-slide="prev">
-               <i class="fa fa-angle-left"></i>
-               </a>
-               <a class="carousel-control-next" href="#my_slider" role="button" data-slide="next">
-               <i class="fa fa-angle-right"></i>
-               </a>
+            <!-- 移动端菜单 -->
+            <div id="mobile-menu" class="hidden md:hidden mt-2 pb-2">
+                <a href="#" class="block py-2 hover:bg-gray-800 px-2 rounded"><i class="fas fa-home mr-2"></i>首页</a>
+                <a href="#" class="block py-2 hover:bg-gray-800 px-2 rounded"><i class="fas fa-book mr-2"></i>技术文章</a>
+                <a href="#" class="block py-2 hover:bg-gray-800 px-2 rounded"><i class="fas fa-tools mr-2"></i>运维工具</a>
+                <a href="#" class="block py-2 hover:bg-gray-800 px-2 rounded"><i class="fas fa-chart-line mr-2"></i>监控案例</a>
+                <a href="about.html" class="block py-2 hover:bg-gray-800 px-2 rounded"><i class="fas fa-user mr-2"></i>关于我</a>
             </div>
-         </div>            
-      </div>
-      <!-- banner section end -->
-      </div>
-      <!-- header section end -->
-      <!-- protect section start -->
-      <div class="protect_section layout_padding">
-         <div class="container">
-            <div class="row">
-               <div class="col-sm-12">
-                  <h1 class="protect_taital">How to Protect Yourself</h1>
-                  <p class="protect_text">English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for</p>
-               </div>
-            </div>
-            <div class="protect_section_2 layout_padding">
-               <div class="row">
-                  <div class="col-md-6">
-                     <h1 class="hands_text"><a href="#">Wash your <br>hands frequently</a></h1>
-                     <h1 class="hands_text_2"><a href="#">Maintain social <br>distancing</a></h1>
-                     <h1 class="hands_text"><a href="#">Avoid touching eyes,<br>nose and mouth</a></h1>
-                  </div>
-                  <div class="col-md-6">
-                     <div class="image_2"><img src="images/img-2.png"></div>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-      <!-- protect section end -->
-      <!-- about section start -->
-      <div class="about_section layout_padding">
-         <div class="container">
-            <div class="row">
-               <div class="col-md-6">
-                  <div class="about_img"><img src="images/img-1.png"></div>
-               </div>
-               <div class="col-md-6">
-                  <h1 class="about_taital">Coronavirus what it is?</span></h1>
-                  <p class="about_text">when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using</p>
-                  <div class="read_bt"><a href="#">Read More</a></div>
-               </div>
-            </div>
-         </div>
-      </div>
-      <!-- about section end -->
-      <!-- doctor section start -->
-      <div class="doctors_section layout_padding">
-         <div class="container-fluid">
-            <div class="row">
-               <div class="col-sm-12">
-                  <div class="taital_main">
-                     <div class="taital_left">
-                        <div class="play_icon"><img src="images/play-icon.png"></div>
-                     </div>
-                     <div class="taital_right">
-                        <h1 class="doctor_taital">What doctors say..</h1>
-                        <p class="doctor_text">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look</p>
-                        <div class="readmore_bt"><a href="#">Read More</a></div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-      <!-- doctor section end -->
-      <!-- news section start -->
-      <div class="news_section layout_padding">
-         <div class="container">
-            <div id="main_slider" class="carousel slide" data-ride="carousel">
-               <div class="carousel-inner">
-                  <div class="carousel-item active">
-                     <h1 class="news_taital">Latest News</h1>
-                     <p class="news_text">when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using</p>
-                     <div class="news_section_2 layout_padding">
-                        <div class="box_main">
-                           <div class="image_1"><img src="images/news-img.png"></div>
-                           <h2 class="design_text">Coronavirus is Very dangerous</h2>
-                           <p class="lorem_text">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look</p>
-                           <div class="read_btn"><a href="#">Read More</a></div>
+        </div>
+    </nav>
+
+    <!-- 主要内容区 -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- 服务器状态面板 -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-6 flex items-center">
+                <i class="fas fa-heartbeat text-red-500 mr-2"></i>服务器状态监控
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="server-status text-white rounded-lg p-6 shadow-lg">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-xl font-bold">生产服务器</h3>
+                        <span class="bg-green-500 text-xs px-2 py-1 rounded-full animate-pulse">运行中</span>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex justify-between">
+                            <span>CPU负载</span>
+                            <span class="font-mono">2.4%</span>
                         </div>
-                     </div>
-                  </div>
-                  <div class="carousel-item">
-                    <h1 class="news_taital">Latest News</h1>
-                     <p class="news_text">when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using</p>
-                     <div class="news_section_2 layout_padding">
-                        <div class="box_main">
-                           <div class="image_1"><img src="images/news-img.png"></div>
-                           <h2 class="design_text">Coronavirus is Very dangerous</h2>
-                           <p class="lorem_text">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look</p>
-                           <div class="read_btn"><a href="#">Read More</a></div>
+                        <div class="w-full bg-gray-700 rounded-full h-2">
+                            <div class="bg-green-400 h-2 rounded-full" style="width: 2.4%"></div>
                         </div>
-                     </div>
-                  </div>
-                  <div class="carousel-item">
-                    <h1 class="news_taital">Latest News</h1>
-                     <p class="news_text">when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using</p>
-                     <div class="news_section_2 layout_padding">
-                        <div class="box_main">
-                           <div class="image_1"><img src="images/news-img.png"></div>
-                           <h2 class="design_text">Coronavirus is Very dangerous</h2>
-                           <p class="lorem_text">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look</p>
-                           <div class="read_btn"><a href="#">Read More</a></div>
+                        <div class="flex justify-between">
+                            <span>内存使用</span>
+                            <span class="font-mono">18/32GB</span>
                         </div>
-                     </div>      
-                  </div>
-               </div>
-               <a class="carousel-control-prev" href="#main_slider" role="button" data-slide="prev">
-               <i class="fa fa-angle-left"></i>
-               </a>
-               <a class="carousel-control-next" href="#main_slider" role="button" data-slide="next">
-               <i class="fa fa-angle-right"></i>
-               </a>
+                        <div class="w-full bg-gray-700 rounded-full h-2">
+                            <div class="bg-blue-400 h-2 rounded-full" style="width: 56%"></div>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>磁盘空间</span>
+                            <span class="font-mono">120/500GB</span>
+                        </div>
+                        <div class="w-full bg-gray-700 rounded-full h-2">
+                            <div class="bg-yellow-400 h-2 rounded-full" style="width: 24%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="server-status text-white rounded-lg p-6 shadow-lg">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-xl font-bold">数据库服务器</h3>
+                        <span class="bg-green-500 text-xs px-2 py-1 rounded-full">运行中</span>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex justify-between">
+                            <span>CPU负载</span>
+                            <span class="font-mono">14.8%</span>
+                        </div>
+                        <div class="w-full bg-gray-700 rounded-full h-2">
+                            <div class="bg-green-400 h-2 rounded-full" style="width: 14.8%"></div>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>内存使用</span>
+                            <span class="font-mono">39/64GB</span>
+                        </div>
+                        <div class="w-full bg-gray-700 rounded-full h-2">
+                            <div class="bg-blue-400 h-2 rounded-full" style="width: 60.9%"></div>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>磁盘空间</span>
+                            <span class="font-mono">347/1024GB</span>
+                        </div>
+                        <div class="w-full bg-gray-700 rounded-full h-2">
+                            <div class="bg-yellow-400 h-2 rounded-full" style="width: 34%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="server-status text-white rounded-lg p-6 shadow-lg">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-xl font-bold">网络状态</h3>
+                        <span class="bg-green-500 text-xs px-2 py-1 rounded-full">正常</span>
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span>入站流量</span>
+                                <span class="font-mono">45 Mbps</span>
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-2">
+                                <div class="bg-purple-400 h-2 rounded-full" style="width: 45%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span>出站流量</span>
+                                <span class="font-mono">28 Mbps</span>
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-2">
+                                <div class="bg-pink-400 h-2 rounded-full" style="width: 28%"></div>
+                            </div>
+                        </div>
+                        <div class="pt-2">
+                            <div class="flex items-center space-x-2">
+                                <i class="fas fa-shield-alt text-yellow-400"></i>
+                                <span>防火墙状态: <span class="font-bold">启用</span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+        </section>
+
+        <div class="flex flex-col lg:flex-row gap-8">
+            <!-- 文章列表 -->
+            <div class="lg:w-2/3">
+                <section class="mb-12">
+                    <h2 class="text-2xl font-bold mb-6 flex items-center">
+                        <i class="fas fa-file-alt text-blue-500 mr-2"></i>最新技术文章
+                    </h2>
+                    
+                    <div class="space-y-6">
+                        <!-- 文章1 -->
+                        <article class="bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl">
+                            <div class="p-6">
+                                <div class="flex items-center text-gray-500 text-sm mb-3">
+                                    <span class="mr-4"><i class="far fa-calendar-alt mr-1"></i>2025-09-28</span>
+                                    <span><i class="far fa-eye mr-1"></i>4698</span>
+                                </div>
+                                <h3 class="text-xl font-bold mb-3">Prometheus+Grafana监控体系搭建</h3>
+                                <p class="text-gray-700 mb-4">手把手教你从零开始搭建完整的Prometheus监控系统，包括Exporter配置、告警规则编写、Grafana仪表盘制作等全流程实践...</p>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span class="bg-red-100 text-red-800 text-xs px-2 py-1 rounded">Prometheus</span>
+                                    <span class="bg-orange-100 text-orange-800 text-xs px-2 py-1 rounded">Grafana</span>
+                                    <span class="bg-teal-100 text-teal-800 text-xs px-2 py-1 rounded">监控</span>
+                                </div>
+                                <a href="monitor.html" class="text-blue-600 font-medium hover:text-blue-800 inline-flex items-center">
+                                    阅读全文 <i class="fas fa-arrow-right ml-1"></i>
+                                </a>
+                            </div>
+                        </article>
+                        <!-- 文章2 -->
+                        <article class="bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl">
+                            <div class="p-6">
+                                <div class="flex items-center text-gray-500 text-sm mb-3">
+                                    <span class="mr-4"><i class="far fa-calendar-alt mr-1"></i>2025-09-21</span>
+                                    <span><i class="far fa-eye mr-1"></i>843</span>
+                                </div>
+                                <h3 class="text-xl font-bold mb-3">Docker容器网络深度解析</h3>
+                                <p class="text-gray-700 mb-4">深入探讨Docker的网络模型，包括bridge/host/none/macvlan等网络模式的工作原理和适用场景，以及如何配置自定义网络和安全策略...</p>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span class="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded">Docker</span>
+                                    <span class="bg-indigo-100 text-indigo-800 text-xs px-2 py-1 rounded">容器技术</span>
+                                    <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">网络</span>
+                                </div>
+                                <a href="docker.html" class="text-blue-600 font-medium hover:text-blue-800 inline-flex items-center">
+                                    阅读全文 <i class="fas fa-arrow-right ml-1"></i>
+                                </a>
+                            </div>
+                        </article>
+
+                        <!-- 文章3 -->
+                        <article class="bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl">
+                            <div class="p-6">
+                                <div class="flex items-center text-gray-500 text-sm mb-3">
+                                    <span class="mr-4"><i class="far fa-calendar-alt mr-1"></i>2025-08-09</span>
+                                    <span><i class="far fa-eye mr-1"></i>1435</span>
+                                </div>
+                                <h3 class="text-xl font-bold mb-3">Linux性能优化实战指南</h3>
+                                <p class="text-gray-700 mb-4">本文详细介绍了Linux服务器性能优化的各种方法和工具，包括top/vmstat/iostat的使用，内核参数调优，以及常见性能问题的解决方案...</p>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Linux</span>
+                                    <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded">性能优化</span>
+                                    <span class="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded">服务器</span>
+                                </div>
+                                <a href="linux.html" class="text-blue-600 font-medium hover:text-blue-800 inline-flex items-center">
+                                    阅读全文 <i class="fas fa-arrow-right ml-1"></i>
+                                </a>
+                            </div>
+                        </article>
+                    </div>
+
+                    <div class="mt-8 flex justify-center">
+                        <nav class="inline-flex rounded-md shadow">
+                            <a href="#" class="px-4 py-2 border border-gray-300 bg-white text-blue-600 rounded-l-md hover:bg-gray-50">上一页</a>
+                            <a href="#" class="px-4 py-2 border-t border-b border-gray-300 bg-white text-blue-600 hover:bg-gray-50">1</a>
+                            <a href="#" class="px-4 py-2 border-t border-b border-gray-300 bg-blue-600 text-white">2</a>
+                            <a href="#" class="px-4 py-2 border-t border-b border-gray-300 bg-white text-blue-600 hover:bg-gray-50">3</a>
+                            <a href="#" class="px-4 py-2 border border-gray-300 bg-white text-blue-600 rounded-r-md hover:bg-gray-50">下一页</a>
+                        </nav>
+                    </div>
+                </section>
             </div>
-         </div>
-      </div>
-      <!-- news section end -->
-      <!-- update section start -->
-      <div class="update_section">
-         <div class="container">
-            <h1 class="update_taital">Get Every Update.... </h1>
-            <form action="/action_page.php">
-               <div class="form-group">
-                   <textarea class="update_mail" placeholder="Massage" rows="5" id="comment" name="Massage"></textarea>
-               </div>
-               <div class="subscribe_bt"><a href="#">Subscribe Now</a></div>
-            </form>
-         </div>
-      </div>
-      <!-- update section end -->
-      <!-- footer section start -->
-      <div class="footer_section layout_padding">
-         <div class="container">
-            <div class="footer_section_2">
-               <div class="row">
-                  <div class="col-lg-3 col-sm-6">
-                     <h2 class="useful_text">Resources</h2>
-                     <div class="footer_menu">
-                        <ul>
-                           <li><a href="#">What we do</a></li>
-                           <li><a href="#">Media</a></li>
-                           <li><a href="#">Travel Advice</a></li>
-                           <li><a href="#">Protection</a></li>
-                           <li><a href="#">Care</a></li>
-                        </ul>
-                     </div>
-                  </div>
-                  <div class="col-lg-3 col-sm-6">
-                     <h2 class="useful_text">About</h2>
-                     <p class="footer_text">Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various</p>
-                  </div>
-                  <div class="col-lg-3 col-sm-6">
-                     <h2 class="useful_text">Contact Us</h2>
-                     <div class="location_text">
-                        <ul>
-                           <li>
-                              <a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i>
-                              <span class="padding_15">Location</span></a>
-                           </li>
-                           <li>
-                              <a href="#"><i class="fa fa-phone" aria-hidden="true"></i>
-                              <span class="padding_15">Call +01 1234567890</span></a>
-                           </li>
-                           <li>
-                              <a href="#"><i class="fa fa-envelope" aria-hidden="true"></i>
-                              <span class="padding_15">demo@gmail.com</span></a>
-                           </li>
-                        </ul>
-                     </div>
-                  </div>
-                  <div class="col-lg-3 col-sm-6">
-                     <h2 class="useful_text">countrys</h2>
-                     <div class="map_image"><img src="images/map-bg.png"></div>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-      <!-- footer section end -->
-      <!-- copyright section start -->
-      <div class="copyright_section">
-         <div class="container">
-            <div class="row">
-               <div class="col-sm-12">
-                  <p class="copyright_text">Copyright &copy; 2021.清下泫月 All rights reserved</p>
-               </div>
-            </div>
-         </div>
-      </div>
-      <!-- copyright section end -->
-      <!-- Javascript files-->
-      <script src="js/jquery.min.js"></script>
-      <script src="js/popper.min.js"></script>
-      <script src="js/bootstrap.bundle.min.js"></script>
-      <script src="js/jquery-3.0.0.min.js"></script>
-      <script src="js/plugin.js"></script>
-      <!-- sidebar -->
-      <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
-      <script src="js/custom.js"></script>
-      <!-- javascript --> 
-      <script src="js/owl.carousel.js"></script>
-      <script src="js/jquery.fancybox.min.js"></script>
-      <script>
-         $(document).ready(function(){
-         $(".fancybox").fancybox({
-         openEffect: "none",
-         closeEffect: "none"
-         });
-              
-         $(".zoom").hover(function(){
-              
-         $(this).addClass('transition');
-         }, function(){
-              
-         $(this).removeClass('transition');
-         });
-         });
-      </script> 
-      <script>
-         function openNav() {
-         document.getElementById("myNav").style.width = "100%";
-         }
-         function closeNav() {
-         document.getElementById("myNav").style.width = "0%";
-         }
-      </script>  
-   </body>
-</html>
+
+            <!-- 侧边栏 -->
+            <div class="lg:w-1/3">
+                <!-- 关于作者 -->
+                <section class="bg-white rounded-lg shadow-md p-6 mb-6">
+                    <h2 class="text-xl font-bold mb-4 flex items-center">
+                        <i class="fas fa-user-tie text-gray-700 mr-2"></i>关于作者
+                    </h2>
+                    <div class="flex items-start mb-4">
+                        <img src="images/img.jpg" alt="运维工程师头像" class="w-16 h-16 rounded-full mr-4 border-2 border-blue-400">
+                        <div>
+                            <h3 class="font-bold">潘运维</h3>
+                            <p class="text-gray-600 text-sm">高级运维工程师 | DevOps实践者</p>
+                            <p class="text-gray-700 text-sm mt-1">10年Linux运维经验，专注云原生和自动化运维</p>
+                        </div>
+                    </div>
+                    <div class="flex space-x-4 justify-center">
+                        <a href="https://github.com/penny1027" class="text-gray-700 hover:text-blue-600"><i class="fab fa-github fa-lg"></i></a>
+                        <a href="#" class="text-blue-400 hover:text-blue-600"><i class="fab fa-twitter fa-lg"></i></a>
+                        <a href="#" class="text-red-500 hover:text-red-700"><i class="fab fa-youtube fa-lg"></i></a>
+                        <a href="#" class="text-green-600 hover:text-green-800"><i class="fab fa-weixin fa-lg"></i></a>
+                    </div>
+                </section>
+
+                <!-- 运维工具推荐 -->
+                <section class="bg-white rounded-lg shadow-md p-6 mb-6">
+                    <h2 class="text-xl font-bold mb-4 flex items-center">
+                        <i class="fas fa-tools text-gray-700 mr-2"></i>工具推荐
+                    </h2>
+                    <div class="space-y-4">
+                        <a href="ansible.html" class="tool-card block bg-gray-50 hover:bg-blue-50 p-4 rounded-lg border border-gray-200 transition-all duration-300">
+                            <h3 class="font-bold mb-1">Ansible自动化工具</h3>
+                            <p class="text-gray-600 text-sm">基础设施即代码，批量配置管理</p>
+                        </a>
+                        <a href="terraform.html" class="tool-card block bg-gray-50 hover:bg-blue-50 p-4 rounded-lg border border-gray-200 transition-all duration-300">
+                            <h3 class="font-bold mb-1">Terraform</h3>
+                            <p class="text-gray-600 text-sm">多云基础设施编排工具</p>
+                        </a>
+                        <a href="k8s.html" class="tool-card block bg-gray-50 hover:bg-blue-50 p-4 rounded-lg border border-gray-200 transition-all duration-300">
+                            <h3 class="font-bold mb-1">Kubernetes</h3>
+                            <p class="text-gray-600 text-sm">容器编排管理系统</p>
+                        </a>
+                        <a href="elk.html" class="tool-card block bg-gray-50 hover:bg-blue-50 p-4 rounded-lg border border-gray-200 transition-all duration-300">
+                            <h3 class="font-bold mb-1">ELK Stack</h3>
+                            <p class="text-gray-600 text-sm">日志收集与分析平台</p>
+                        </a>
+                    </div>
+                </section>
+
+                <!-- 标签云 -->
+                <section class="bg-white rounded-lg shadow-md p-6">
+                    <h2 class="text-xl font-bold mb-4 flex items-center">
+                        <i class="fas fa-tags text-gray-700 mr-2"></i>热门标签
+                    </h2>
+                    <div class="flex flex-wrap gap-2">
+                        <a href="#" class="px-3 py-1 bg-gray-100 text-gray-800 text-sm rounded-full hover:bg-blue-100 hover:text-blue-800">Linux</a>
+                        <a href="#" class="px-3 py-1 bg-gray

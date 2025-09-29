@@ -1,0 +1,333 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ansible自动化工具 - 基础设施即代码解决方案</title>
+	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+        }
+        .ansible-blue {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+        }
+        .playbook-code {
+            font-family: 'Courier New', monospace;
+            background-color: #2d3748;
+            color: #f7fafc;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- 导航栏 -->
+    <nav class="ansible-blue text-white shadow-lg sticky top-0 z-10">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-robot text-white text-2xl"></i>
+                    <a href="#" class="text-xl font-bold">Ansible自动化工具</a>
+                </div>
+                <div class="hidden md:flex space-x-8">
+				    <a href="index.html" class="hover:text-blue-200">首页</a>
+                    <a href="#features" class="hover:text-blue-200">核心特性</a>
+                    <a href="#architecture" class="hover:text-blue-200">架构原理</a>
+                    <a href="#playbook" class="hover:text-blue-200">Playbook示例</a>
+                    <a href="#resources" class="hover:text-blue-200">学习资源</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-white focus:outline-none">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- 移动端菜单 -->
+            <div id="mobile-menu" class="hidden md:hidden mt-2 pb-2">
+			    <a href="index.html" class="block py-2 hover:bg-blue-800 px-2 rounded">首页</a>
+                <a href="#features" class="block py-2 hover:bg-blue-800 px-2 rounded">核心特性</a>
+                <a href="#architecture" class="block py-2 hover:bg-blue-800 px-2 rounded">架构原理</a>
+                <a href="#playbook" class="block py-2 hover:bg-blue-800 px-2 rounded">Playbook示例</a>
+                <a href="#resources" class="block py-2 hover:bg-blue-800 px-2 rounded">学习资源</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 英雄区域 -->
+    <header class="ansible-blue text-white py-16">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6">基础设施即代码的革命</h1>
+            <p class="text-xl mb-8 max-w-3xl mx-auto">Ansible - 简单强大的自动化工具，实现配置管理、应用部署和任务编排</p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="#get-started" class="bg-white text-blue-800 px-6 py-3 rounded-lg font-bold hover:bg-gray-100 transition">快速开始</a>
+                <a href="https://docs.ansible.com" target="_blank" class="border-2 border-white text-white px-6 py-3 rounded-lg font-bold hover:bg-blue-700 transition">官方文档</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主要内容区 -->
+    <main class="container mx-auto px-4 py-12">
+        <!-- 特性介绍 -->
+        <section id="features" class="mb-16">
+            <h2 class="text-3xl font-bold mb-12 text-center">为什么选择Ansible?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="feature-card bg-white rounded-lg p-6 shadow-md transition-all duration-300">
+                    <div class="text-blue-600 mb-4">
+                        <i class="fas fa-bolt text-4xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">无代理架构</h3>
+                    <p class="text-gray-700">通过SSH协议直接管理节点，无需在目标主机安装任何客户端代理，简化部署和维护。</p>
+                </div>
+                <div class="feature-card bg-white rounded-lg p-6 shadow-md transition-all duration-300">
+                    <div class="text-blue-600 mb-4">
+                        <i class="fas fa-file-code text-4xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">YAML语法</h3>
+                    <p class="text-gray-700">使用易读的YAML格式编写Playbook，降低学习曲线，便于版本控制和团队协作。</p>
+                </div>
+                <div class="feature-card bg-white rounded-lg p-6 shadow-md transition-all duration-300">
+                    <div class="text-blue-600 mb-4">
+                        <i class="fas fa-network-wired text-4xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">模块化设计</h3>
+                    <p class="text-gray-700">丰富的内置模块支持各种运维任务，从软件安装到云资源管理，覆盖全场景需求。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 架构图 -->
+        <section id="architecture" class="mb-16">
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <div class="p-6 md:p-8">
+                    <h2 class="text-3xl font-bold mb-6">Ansible架构原理</h2>
+                    <div class="flex flex-col md:flex-row gap-8 items-center">
+                        <div class="md:w-1/2">
+                            <img src="https://picsum.photos/600/400?random=ansible" alt="Ansible架构示意图" class="rounded-lg shadow">
+                        </div>
+                        <div class="md:w-1/2">
+                            <div class="space-y-4">
+                                <div class="flex items-start">
+                                    <div class="bg-blue-100 p-2 rounded-full mr-4">
+                                        <i class="fas fa-laptop-code text-blue-600"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-bold mb-1">控制节点</h3>
+                                        <p class="text-gray-700">运行Ansible的主机，包含Inventory文件和Playbook，通过SSH管理目标节点。</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <div class="bg-green-100 p-2 rounded-full mr-4">
+                                        <i class="fas fa-server text-green-600"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-bold mb-1">被管节点</h3>
+                                        <p class="text-gray-700">无需安装特殊软件，只需支持Python和SSH即可被Ansible管理。</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <div class="bg-purple-100 p-2 rounded-full mr-4">
+                                        <i class="fas fa-cubes text-purple-600"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-bold mb-1">模块系统</h3>
+                                        <p class="text-gray-700">执行特定任务的代码单元，通过临时命令或Playbook调用，结果以JSON格式返回。</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <div class="bg-yellow-100 p-2 rounded-full mr-4">
+                                        <i class="fas fa-plug text-yellow-600"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-bold mb-1">插件系统</h3>
+                                        <p class="text-gray-700">扩展Ansible核心功能，包括连接插件、过滤器插件、回调插件等。</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Playbook示例 -->
+        <section id="playbook" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">Playbook示例</h2>
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <div class="p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-red-500 w-3 h-3 rounded-full mr-2"></div>
+                        <div class="bg-yellow-500 w-3 h-3 rounded-full mr-2"></div>
+                        <div class="bg-green-500 w-3 h-3 rounded-full mr-4"></div>
+                        <span class="text-gray-500 font-mono">webserver.yml</span>
+                    </div>
+                    <pre class="playbook-code p-4 rounded-lg overflow-x-auto"><code>---
+# 安装并配置Apache Web服务器
+- hosts: webservers
+  become: yes
+  vars:
+    http_port: 80
+    max_clients: 200
+
+  tasks:
+    - name: 安装Apache
+      yum:
+        name: httpd
+        state: latest
+
+    - name: 写入配置文件
+      template:
+        src: templates/httpd.conf.j2
+        dest: /etc/httpd/conf/httpd.conf
+      notify:
+        - 重启Apache
+
+    - name: 确保Apache正在运行
+      service:
+        name: httpd
+        state: started
+        enabled: yes
+
+  handlers:
+    - name: 重启Apache
+      service:
+        name: httpd
+        state: restarted</code></pre>
+                </div>
+                <div class="bg-gray-50 px-6 py-4 border-t border-gray-200">
+                    <div class="flex flex-wrap gap-4">
+                        <div class="flex items-center">
+                            <div class="bg-blue-100 p-2 rounded-full mr-3">
+                                <i class="fas fa-info-circle text-blue-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">Playbook结构</h4>
+                                <p class="text-sm text-gray-600">YAML格式，包含hosts、tasks、handlers等部分</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="bg-green-100 p-2 rounded-full mr-3">
+                                <i class="fas fa-tasks text-green-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">幂等性</h4>
+                                <p class="text-sm text-gray-600">多次执行结果一致，避免重复操作</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="bg-purple-100 p-2 rounded-full mr-3">
+                                <i class="fas fa-code-branch text-purple-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">模块调用</h4>
+                                <p class="text-sm text-gray-600">使用yum、template、service等内置模块</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 快速开始 -->
+        <section id="get-started" class="mb-16 bg-white rounded-lg shadow-md p-8">
+            <h2 class="text-3xl font-bold mb-6 text-center">快速开始</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">安装Ansible</h3>
+                    <div class="bg-gray-800 text-gray-100 p-4 rounded-lg mb-4">
+                        <p class="font-mono"># 在控制节点上安装</p>
+                        <p class="font-mono">$ sudo apt update</p>
+                        <p class="font-mono">$ sudo apt install ansible -y</p>
+                    </div>
+                    <p class="text-gray-700 mb-4">支持多种平台安装：</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">RHEL/CentOS</span>
+                        <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">Ubuntu/Debian</span>
+                        <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm">macOS</span>
+                        <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm">Windows(WSL)</span>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">基本使用</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <p class="font-bold mb-1">测试连接</p>
+                            <div class="bg-gray-800 text-gray-100 p-3 rounded-lg">
+                                <p class="font-mono">$ ansible all -m ping</p>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="font-bold mb-1">执行临时命令</p>
+                            <div class="bg-gray-800 text-gray-100 p-3 rounded-lg">
+                                <p class="font-mono">$ ansible webservers -a "uptime"</p>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="font-bold mb-1">运行Playbook</p>
+                            <div class="bg-gray-800 text-gray-100 p-3 rounded-lg">
+                                <p class="font-mono">$ ansible-playbook site.yml</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 学习资源 -->
+        <section id="resources" class="mb-8">
+            <h2 class="text-3xl font-bold mb-8 text-center">学习资源</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <a href="https://docs.ansible.com" target="_blank" class="bg-white hover:bg-blue-50 rounded-lg shadow-md p-6 border border-gray-200 transition">
+                    <div class="text-blue-600 mb-3">
+                        <i class="fas fa-book-open text-3xl"></i>
+                    </div>
+                    <h3 class="font-bold mb-2">官方文档</h3>
+                    <p class="text-gray-600 text-sm">全面详细的Ansible使用手册和API参考</p>
+                </a>
+                <a href="https://galaxy.ansible.com" target="_blank" class="bg-white hover:bg-blue-50 rounded-lg shadow-md p-6 border border-gray-200 transition">
+                    <div class="text-purple-600 mb-3">
+                        <i class="fas fa-star text-3xl"></i>
+                    </div>
+                    <h3 class="font-bold mb-2">Ansible Galaxy</h3>
+                    <p class="text-gray-600 text-sm">共享和获取社区贡献的Roles和Playbook</p>
+                </a>
+                <a href="https://www.redhat.com/en/technologies/management/ansible" target="_blank" class="bg-white hover:bg-blue-50 rounded-lg shadow-md p-6 border border-gray-200 transition">
+                    <div class="text-red-600 mb-3">
+                        <i class="fas fa-certificate text-3xl"></i>
+                    </div>
+                    <h3 class="font-bold mb-2">官方培训</h3>
+                    <p class="text-gray-600 text-sm">Red Hat提供的认证课程和培训材料</p>
+                </a>
+                <a href="https://github.com/ansible/ansible" target="_blank" class="bg-white hover:bg-blue-50 rounded-lg shadow-md p-6 border border-gray-200 transition">
+                    <div class="text-gray-800 mb-3">
+                        <i class="fab fa-github text-3xl"></i>
+                    </div>
+                    <h3 class="font-bold mb-2">GitHub仓库</h3>
+                    <p class="text-gray-600 text-sm">开源代码库，参与社区贡献</p>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-robot text-blue-400 text-2xl"></i>
+                        <span class="text-xl font-bold">Ansible自动化</span>
+                    </div>
+                    <p class="text-gray-400 mt-2">简化运维工作流的强大工具</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="https://github.com/penny1027" class="text-gray-400 hover:text-white"><i class="fab fa-github fa-lg"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter fa-lg"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-slack fa-lg"></i></a>
+                </div>
+            </div>
+            </div>
+        </div>
+    </footer>

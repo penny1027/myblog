@@ -1,0 +1,352 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docker容器网络深度解析</title>
+	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .network-diagram {
+            background-color: #f8fafc;
+            border-radius: 0.5rem;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        .code-block {
+            background-color: #2d3748;
+            color: #e2e8f0;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            font-family: monospace;
+            overflow-x: auto;
+        }
+        .network-card {
+            transition: all 0.3s ease;
+        }
+        .network-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- 导航栏 -->
+    <nav class="bg-blue-800 text-white shadow-lg sticky top-0 z-10">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <i class="fab fa-docker text-2xl"></i>
+                    <span class="text-xl font-bold">Docker容器网络深度解析</span>
+                </div>
+                <div class="hidden md:flex space-x-6">
+				    <a href="index.html" class="hover:text-blue-200">首页</a>
+                    <a href="#overview" class="hover:text-blue-200">概述</a>
+                    <a href="#models" class="hover:text-blue-200">网络模型</a>
+                    <a href="#practice" class="hover:text-blue-200">实践指南</a>
+                    <a href="#troubleshooting" class="hover:text-blue-200">故障排查</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主要内容区 -->
+    <main class="container mx-auto px-4 py-12 max-w-5xl">
+        <!-- 概述部分 -->
+        <section id="overview" class="mb-16">
+            <div class="bg-white rounded-xl shadow-md p-8 network-card">
+                <h1 class="text-3xl font-bold mb-6 text-gray-800">Docker容器网络深度解析</h1>
+                <p class="text-gray-700 mb-6">Docker容器网络是容器化技术中最复杂也是最重要的部分之一。理解Docker网络模型和工作原理，能够帮助您构建更安全、更高效的容器化应用。</p>
+                
+                <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6">
+                    <p class="text-blue-700"><i class="fas fa-info-circle mr-2"></i>Docker网络的核心价值：为容器提供隔离的网络环境，同时保持必要的通信能力。</p>
+                </div>
+                
+                <h2 class="text-2xl font-bold mb-4 text-gray-800">Docker网络基础概念</h2>
+                <ul class="list-disc pl-6 text-gray-700 space-y-2 mb-6">
+                    <li><strong>网络命名空间(Network Namespace)</strong>：Linux内核提供的网络隔离机制</li>
+                    <li><strong>虚拟以太网设备(veth pair)</strong>：连接不同网络命名空间的虚拟设备</li>
+                    <li><strong>网桥(Bridge)</strong>：软件实现的二层网络设备，用于连接多个网络接口</li>
+                    <li><strong>iptables/nftables</strong>：实现NAT和网络流量控制</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 网络模型部分 -->
+        <section id="models" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center text-gray-800">Docker网络模型</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- 桥接网络 -->
+                <div class="bg-white rounded-xl shadow-md p-6 network-card">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-blue-100 p-3 rounded-full mr-4">
+                            <i class="fas fa-network-wired text-blue-600"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800">桥接网络(Bridge)</h3>
+                    </div>
+                    <p class="text-gray-700 mb-4">Docker默认网络模式，通过docker0网桥连接容器。</p>
+                    <div class="code-block mb-4">
+                        <pre># 创建自定义桥接网络
+docker network create my-bridge</pre>
+                    </div>
+                    <ul class="list-disc pl-4 text-gray-700 text-sm space-y-1">
+                        <li>容器间通过IP或容器名通信</li>
+                        <li>支持端口映射到宿主机</li>
+                        <li>默认提供DNS解析服务</li>
+                    </ul>
+                </div>
+                
+                <!-- Host网络 -->
+                <div class="bg-white rounded-xl shadow-md p-6 network-card">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-green-100 p-3 rounded-full mr-4">
+                            <i class="fas fa-server text-green-600"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800">Host网络</h3>
+                    </div>
+                    <p class="text-gray-700 mb-4">容器直接使用宿主机的网络栈。</p>
+                    <div class="code-block mb-4">
+                        <pre># 使用host网络模式运行容器
+docker run --network=host nginx</pre>
+                    </div>
+                    <ul class="list-disc pl-4 text-gray-700 text-sm space-y-1">
+                        <li>性能最好，无NAT开销</li>
+                        <li>网络隔离性最差</li>
+                        <li>适合高性能网络应用</li>
+                    </ul>
+                </div>
+                
+                <!-- 覆盖网络 -->
+                <div class="bg-white rounded-xl shadow-md p-6 network-card">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-purple-100 p-3 rounded-full mr-4">
+                            <i class="fas fa-project-diagram text-purple-600"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800">覆盖网络(Overlay)</h3>
+                    </div>
+                    <p class="text-gray-700 mb-4">跨主机的容器网络解决方案。</p>
+                    <div class="code-block mb-4">
+                        <pre># 创建覆盖网络
+docker network create -d overlay my-overlay</pre>
+                    </div>
+                    <ul class="list-disc pl-4 text-gray-700 text-sm space-y-1">
+                        <li>支持多主机容器通信</li>
+                        <li>内置加密和负载均衡</li>
+                        <li>Swarm集群默认使用</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- 网络模型对比 -->
+            <div class="bg-white rounded-xl shadow-md p-8 mt-8 network-card">
+                <h3 class="text-2xl font-bold mb-6 text-gray-800">Docker网络模型对比</h3>
+                <div class="overflow-x-auto">
+                <table class="min-w-full bg-white rounded-lg overflow-hidden mb-6">
+                    <thead class="bg-gray-100">
+                        <tr>
+                            <th class="py-3 px-4 text-left font-semibold text-gray-700">驱动类型</th>
+                            <th class="py-3 px-4 text-left font-semibold text-gray-700">描述</th>
+                            <th class="py-3 px-4 text-left font-semibold text-gray-700">适用场景</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200">
+                        <tr>
+                            <td class="py-3 px-4 text-blue-600 font-medium">bridge</td>
+                            <td class="py-3 px-4 text-gray-700">默认驱动，创建私有内部网络</td>
+                            <td class="py-3 px-4 text-gray-700">单主机容器通信</td>
+                        </tr>
+                        <tr class="bg-gray-50">
+                            <td class="py-3 px-4 text-blue-600 font-medium">host</td>
+                            <td class="py-3 px-4 text-gray-700">直接使用主机网络栈</td>
+                            <td class="py-3 px-4 text-gray-700">高性能网络需求</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 text-blue-600 font-medium">overlay</td>
+                            <td class="py-3 px-4 text-gray-700">跨主机容器网络</td>
+                            <td class="py-3 px-4 text-gray-700">Swarm集群</td>
+                        </tr>
+                    </tbody>
+                </table>
+                </div>
+                <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6">
+                    <h4 class="font-bold text-lg mb-2 text-blue-700"><i class="fas fa-lightbulb mr-2"></i>网络驱动选择建议</h4>
+                    <ul class="list-disc pl-5 text-gray-700">
+                        <li class="mb-2">开发测试环境推荐使用bridge驱动，简单易用</li>
+                        <li class="mb-2">生产环境高吞吐量应用考虑host驱动减少开销</li>
+                        <li class="mb-2">跨主机通信必须使用overlay</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 实践指南部分 -->
+        <section id="practice" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center text-gray-800">Docker网络实践指南</h2>
+            
+            <div class="bg-white rounded-xl shadow-md p-8 network-card mb-8">
+                <h3 class="text-2xl font-bold mb-4 text-gray-800">1. 自定义网络配置</h3>
+                <p class="text-gray-700 mb-6">Docker允许创建自定义网络，提供更灵活的容器连接方式。</p>
+                
+                <div class="code-block mb-6">
+                    <pre># 创建自定义桥接网络，指定子网和网关
+docker network create \
+  --driver=bridge \
+  --subnet=172.28.0.0/16 \
+  --gateway=172.28.0.1 \
+  my-custom-net
+
+# 使用自定义网络运行容器
+docker run -d --name=web \
+  --network=my-custom-net \
+  nginx:alpine</pre>
+                </div>
+                
+                <h4 class="text-xl font-bold mb-3 text-gray-800">最佳实践：</h4>
+                <ul class="list-disc pl-6 text-gray-700 space-y-2">
+                    <li>为不同应用创建独立的网络，实现网络隔离</li>
+                    <li>使用DNS名称而非IP地址进行容器间通信</li>
+                    <li>为生产环境配置适当的网络驱动和选项</li>
+                </ul>
+            </div>
+            
+            <div class="bg-white rounded-xl shadow-md p-8 network-card">
+                <h3 class="text-2xl font-bold mb-4 text-gray-800">2. 多容器应用网络配置</h3>
+                <p class="text-gray-700 mb-6">典型的多容器应用(如Web+DB)网络配置示例。</p>
+                
+                <div class="network-diagram mb-6">
+                    <div class="flex justify-center items-center mb-4">
+                        <div class="text-center mx-4">
+                            <div class="bg-blue-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-2">
+                                <i class="fas fa-globe text-blue-600 text-2xl"></i>
+                            </div>
+                            <p class="text-sm">客户端</p>
+                        </div>
+                        <i class="fas fa-arrow-right text-gray-400 mx-2"></i>
+                        <div class="text-center mx-4">
+                            <div class="bg-green-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-2">
+                                <i class="fas fa-server text-green-600 text-2xl"></i>
+                            </div>
+                            <p class="text-sm">Web容器</p>
+                        </div>
+                        <i class="fas fa-arrow-right text-gray-400 mx-2"></i>
+                        <div class="text-center mx-4">
+                            <div class="bg-purple-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-2">
+                                <i class="fas fa-database text-purple-600 text-2xl"></i>
+                            </div>
+                            <p class="text-sm">DB容器</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="code-block mb-6">
+                    <pre># 创建应用专用网络
+docker network create app-network
+
+# 启动数据库容器
+docker run -d --name db \
+  --network app-network \
+  -e POSTGRES_PASSWORD=secret \
+  postgres:13
+
+# 启动Web应用容器
+docker run -d --name web \
+  --network app-network \
+  -p 8080:80 \
+  -e DB_HOST=db \
+  my-web-app</pre>
+                </div>
+                
+                <h4 class="text-xl font-bold mb-3 text-gray-800">关键点：</h4>
+                <ul class="list-disc pl-6 text-gray-700 space-y-2">
+                    <li>所有相关容器加入同一自定义网络</li>
+                    <li>通过容器名称而非IP地址访问服务</li>
+                    <li>仅暴露必要的端口到宿主机</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 故障排查部分 -->
+        <section id="troubleshooting" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center text-gray-800">Docker网络故障排查</h2>
+            
+            <div class="bg-white rounded-xl shadow-md p-8 network-card">
+                <h3 class="text-2xl font-bold mb-4 text-gray-800">常见网络问题排查工具</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h4 class="text-lg font-bold mb-2 text-gray-800">1. 容器网络检查</h4>
+                        <div class="code-block">
+                            <pre># 检查容器网络配置
+docker inspect [容器名] | grep IPAddress
+
+# 查看容器网络连接
+docker network inspect [网络名]</pre>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h4 class="text-lg font-bold mb-2 text-gray-800">2. 网络连通性测试</h4>
+                        <div class="code-block">
+                            <pre># 进入容器测试网络
+docker exec -it [容器名] sh
+
+# 测试DNS解析
+nslookup google.com
+
+# 测试端口连通性
+telnet [目标IP] [端口]</pre>
+                        </div>
+                    </div>
+                </div>
+                
+                <h3 class="text-2xl font-bold mb-4 text-gray-800">常见问题及解决方案</h3>
+                
+                <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 mb-6">
+                    <p class="text-yellow-700"><i class="fas fa-exclamation-triangle mr-2"></i><strong>问题1：</strong>容器无法访问外部网络</p>
+                    <p class="text-yellow-700 mt-2"><strong>解决方案：</strong>检查宿主机的iptables/nftables规则，确保NAT规则正确配置</p>
+                </div>
+                
+                <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 mb-6">
+                    <p class="text-yellow-700"><i class="fas fa-exclamation-triangle mr-2"></i><strong>问题2：</strong>容器间无法通过名称通信</p>
+                    <p class="text-yellow-700 mt-2"><strong>解决方案：</strong>确保所有容器在同一自定义网络中，且Docker守护进程的DNS服务正常运行</p>
+                </div>
+                
+                <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4">
+                    <p class="text-yellow-700"><i class="fas fa-exclamation-triangle mr-2"></i><strong>问题3：</strong>端口映射不生效</p>
+                    <p class="text-yellow-700 mt-2"><strong>解决方案：</strong>检查端口是否被占用，确保-p参数格式正确(宿主机端口:容器端口)，验证防火墙设置</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 总结部分 -->
+        <section class="bg-white rounded-xl shadow-md p-8 network-card">
+            <h2 class="text-2xl font-bold mb-4 text-gray-800">Docker网络最佳实践总结</h2>
+            <ul class="list-disc pl-6 text-gray-700 space-y-2 mb-6">
+                <li>为每个应用或服务组创建独立的Docker网络</li>
+				<li>深入解析Docker容器网络原理（涵盖网络模型、驱动类型及安全实践）</li>
+				<li>帮助开发者全面理解Docker网络机制</li>
+            </ul>
+            
+            <div class="bg-blue-50 border-l-4 border-blue-500 p-4">
+                <p class="text-blue-700"><i class="fas fa-book mr-2"></i>推荐阅读：《CNI网络插件》、《Docker官方文档》、《Kubernetes网络模型》</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <p>© 2025 Docker容器网络深度解析. 保留所有权利.</p>
+            <div class="mt-4 flex justify-center space-x-6">
+                <a href="https://github.com/penny1027" class="text-gray-400 hover:text-white"><i class="fab fa-github"></i></a>
+                <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-linkedin"></i></a>
+                <a href="#" class="text-gray-400 hover:text-white"><i class="fas fa-rss"></i></a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

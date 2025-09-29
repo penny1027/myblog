@@ -1,0 +1,288 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+    <title>ELK Stack自动化工具介绍</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .feature-icon {
+            font-size: 2.5rem;
+            color: #667eea;
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-50">
+    <!-- 导航栏 -->
+    <nav class="gradient-bg text-white shadow-lg sticky top-0 z-10">
+        <div class="container mx-auto px-6 py-3">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <i class="fas fa-server text-2xl mr-2"></i>
+                    <span class="font-semibold text-xl">ELK Stack自动化工具</span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+				    <a href="index.html" class="hover:text-gray-200">首页</a>
+                    <a href="#overview" class="hover:text-gray-200">概述</a>
+                    <a href="#components" class="hover:text-gray-200">组件</a>
+                    <a href="#features" class="hover:text-gray-200">特性</a>
+                    <a href="#workflow" class="hover:text-gray-200">工作流程</a>
+                    <a href="#contact" class="hover:text-gray-200">联系我们</a>
+                </div>
+                <button class="md:hidden focus:outline-none">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 英雄区域 -->
+    <header class="gradient-bg text-white py-20">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6">ELK Stack 日志管理自动化解决方案</h1>
+            <p class="text-xl md:text-2xl mb-8">高效收集、存储、分析和可视化您的日志数据</p>
+            <button class="bg-white text-indigo-700 font-bold py-3 px-8 rounded-full hover:bg-gray-100 transition duration-300">
+                开始试用
+            </button>
+        </div>
+    </header>
+
+    <!-- 概述部分 -->
+    <section id="overview" class="py-16 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-12">什么是ELK Stack?</h2>
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-8 md:mb-0 md:pr-8">
+                    <img src="https://picsum.photos/600/400?random=1" alt="ELK Stack架构图" class="rounded-lg shadow-xl">
+                </div>
+                <div class="md:w-1/2">
+                    <p class="text-lg mb-4">
+                        ELK Stack是三个开源项目的首字母缩写：Elasticsearch、Logstash和Kibana。它们共同提供了一个强大的端到端解决方案，用于日志管理和数据分析。
+                    </p>
+                    <p class="text-lg mb-4">
+                        我们的自动化工具简化了ELK Stack的部署和管理流程，让您能够快速搭建日志分析平台，无需复杂的配置和运维工作。
+                    </p>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>一键式部署和配置</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>自动化监控和告警</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>可视化仪表板模板</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 组件部分 -->
+    <section id="components" class="py-16 bg-gray-100">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-12">核心组件</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Elasticsearch 卡片 -->
+                <div class="bg-white p-8 rounded-lg shadow-md card-hover">
+                    <div class="text-center mb-6">
+                        <i class="fas fa-search feature-icon"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-center">Elasticsearch</h3>
+                    <p class="text-gray-700 mb-4">
+                        分布式搜索和分析引擎，提供近实时的搜索和分析能力，能够处理PB级的数据。
+                    </p>
+                    <ul class="text-gray-600 space-y-2">
+                        <li><i class="fas fa-angle-right text-indigo-500 mr-2"></i>高性能全文搜索</li>
+                        <li><i class="fas fa-angle-right text-indigo-500 mr-2"></i>水平可扩展架构</li>
+                        <li><i class="fas fa-angle-right text-indigo-500 mr-2"></i>近实时数据分析</li>
+                    </ul>
+                </div>
+
+                <!-- Logstash 卡片 -->
+                <div class="bg-white p-8 rounded-lg shadow-md card-hover">
+                    <div class="text-center mb-6">
+                        <i class="fas fa-random feature-icon"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-center">Logstash</h3>
+                    <p class="text-gray-700 mb-4">
+                        服务器端数据处理管道，能够同时从多个来源采集数据，转换数据，然后发送到存储库中。
+                    </p>
+                    <ul class="text-gray-600 space-y-2">
+                        <li><i class="fas fa-angle-right text-indigo-500 mr-2"></i>数据采集和解析</li>
+                        <li><i class="fas fa-angle-right text-indigo-500 mr-2"></i>丰富的输入/输出插件</li>
+                        <li><i class="fas fa-angle-right text-indigo-500 mr-2"></i>数据转换和丰富</li>
+                    </ul>
+                </div>
+
+                <!-- Kibana 卡片 -->
+                <div class="bg-white p-8 rounded-lg shadow-md card-hover">
+                    <div class="text-center mb-6">
+                        <i class="fas fa-chart-line feature-icon"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-center">Kibana</h3>
+                    <p class="text-gray-700 mb-4">
+                        数据可视化和管理工具，为Elasticsearch提供可视化的Web界面，让您能够轻松创建丰富的仪表板。
+                    </p>
+                    <ul class="text-gray-600 space-y-2">
+                        <li><i class="fas fa-angle-right text-indigo-500 mr-2"></i>交互式数据可视化</li>
+                        <li><i class="fas fa-angle-right text-indigo-500 mr-2"></i>自定义仪表板</li>
+                        <li><i class="fas fa-angle-right text-indigo-500 mr-2"></i>实时数据分析</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 特性部分 -->
+    <section id="features" class="py-16 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-12">我们的自动化工具特性</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-gray-100 p-8 rounded-lg">
+                    <h3 class="text-xl font-bold mb-4 flex items-center">
+                        <i class="fas fa-bolt text-yellow-500 mr-3"></i>快速部署
+                    </h3>
+                    <p class="text-gray-700">
+                        我们的工具提供一键式部署脚本，能够在几分钟内完成ELK Stack的完整安装和基础配置，大幅减少部署时间和复杂度。
+                    </p>
+                </div>
+                <div class="bg-gray-100 p-8 rounded-lg">
+                    <h3 class="text-xl font-bold mb-4 flex items-center">
+                        <i class="fas fa-sliders-h text-blue-500 mr-3"></i>智能配置
+                    </h3>
+                    <p class="text-gray-700">
+                        根据您的服务器资源和预期负载，自动优化Elasticsearch和Logstash的配置参数，确保最佳性能。
+                    </p>
+                </div>
+                <div class="bg-gray-100 p-8 rounded-lg">
+                    <h3 class="text-xl font-bold mb-4 flex items-center">
+                        <i class="fas fa-shield-alt text-green-500 mr-3"></i>安全加固
+                    </h3>
+                    <p class="text-gray-700">
+                        自动应用安全最佳实践，包括TLS加密、基于角色的访问控制和敏感数据保护，确保您的日志数据安全。
+                    </p>
+                </div>
+                <div class="bg-gray-100 p-8 rounded-lg">
+                    <h3 class="text-xl font-bold mb-4 flex items-center">
+                        <i class="fas fa-tachometer-alt text-red-500 mr-3"></i>监控告警
+                    </h3>
+                    <p class="text-gray-700">
+                        内置监控功能，实时跟踪ELK Stack各组件的健康状况和性能指标，并在异常时发送告警通知。
+                    </p>
+                </div>
+                <div class="bg-gray-100 p-8 rounded-lg">
+                    <h3 class="text-xl font-bold mb-4 flex items-center">
+                        <i class="fas fa-sync-alt text-purple-500 mr-3"></i>自动扩展
+                    </h3>
+                    <p class="text-gray-700">
+                        支持自动扩展Elasticsearch集群，根据数据量和查询负载动态调整节点数量，优化资源利用率。
+                    </p>
+                </div>
+                <div class="bg-gray-100 p-8 rounded-lg">
+                    <h3 class="text-xl font-bold mb-4 flex items-center">
+                        <i class="fas fa-file-export text-indigo-500 mr-3"></i>备份恢复
+                    </h3>
+                    <p class="text-gray-700">
+                        自动化备份解决方案，定期备份Elasticsearch索引和Kibana对象，确保数据安全并提供快速恢复能力。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 工作流程部分 -->
+    <section id="workflow" class="py-16 bg-gray-100">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-12">工作流程</h2>
+            <div class="flex flex-col items-center">
+                <div class="relative w-full max-w-4xl">
+                    <!-- 步骤1 -->
+                    <div class="flex items-start mb-8">
+                        <div class="flex-shrink-0 bg-indigo-600 rounded-full h-12 w-12 flex items-center justify-center text-white font-bold mr-4">1</div>
+                        <div class="bg-white p-6 rounded-lg shadow-md flex-1">
+                            <h3 class="text-xl font-bold mb-2">数据采集</h3>
+                            <p class="text-gray-700">
+                                Logstash从各种来源(服务器日志、应用程序日志、网络设备等)采集日志数据，进行解析和转换。
+                            </p>
+                        </div>
+                    </div>
+                    <!-- 箭头 -->
+                    <div class="absolute left-6 top-12 h-8 w-0.5 bg-indigo-300 ml-5"></div>
+                    
+                    <!-- 步骤2 -->
+                    <div class="flex items-start mb-8">
+                        <div class="flex-shrink-0 bg-indigo-600 rounded-full h-12 w-12 flex items-center justify-center text-white font-bold mr-4">2</div>
+                        <div class="bg-white p-6 rounded-lg shadow-md flex-1">
+                            <h3 class="text-xl font-bold mb-2">数据存储</h3>
+                            <p class="text-gray-700">
+                                处理后的数据被索引到Elasticsearch中，形成高效、可搜索的数据存储。
+                            </p>
+                        </div>
+                    </div>
+                    <!-- 箭头 -->
+                    <div class="absolute left-6 top-32 h-8 w-0.5 bg-indigo-300 ml-5"></div>
+                    
+                    <!-- 步骤3 -->
+                    <div class="flex items-start mb-8">
+                        <div class="flex-shrink-0 bg-indigo-600 rounded-full h-12 w-12 flex items-center justify-center text-white font-bold mr-4">3</div>
+                        <div class="bg-white p-6 rounded-lg shadow-md flex-1">
+                            <h3 class="text-xl font-bold mb-2">数据分析</h3>
+                            <p class="text-gray-700">
+                                Elasticsearch提供强大的搜索和分析能力，支持复杂的查询和聚合操作。
+                            </p>
+                        </div>
+                    </div>
+                    <!-- 箭头 -->
+                    <div class="absolute left-6 top-52 h-8 w-0.5 bg-indigo-300 ml-5"></div>
+                    
+                    <!-- 步骤4 -->
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 bg-indigo-600 rounded-full h-12 w-12 flex items-center justify-center text-white font-bold mr-4">4</div>
+                        <div class="bg-white p-6 rounded-lg shadow-md flex-1">
+                            <h3 class="text-xl font-bold mb-2">数据可视化</h3>
+                            <p class="text-gray-700">
+                                Kibana提供丰富的可视化工具，将数据转化为图表、仪表板和报表，便于理解和决策。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <div class="flex items-center">
+                        <i class="fas fa-server text-2xl mr-2"></i>
+                        <span class="font-semibold text-xl">ELK Stack自动化工具</span>
+                    </div>
+                    <p class="text-gray-400 mt-2">简化日志管理，提升运维效率</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="https://github.com/penny1027" class="text-gray-400 hover:text-white"><i class="fab fa-github fa-lg"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter fa-lg"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-slack fa-lg"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>

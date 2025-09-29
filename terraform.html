@@ -1,0 +1,334 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terraform - 基础设施即代码(IaC)解决方案</title>
+	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .terraform-bg {
+            background: linear-gradient(135deg, #5b4dff 0%, #6a11cb 100%);
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+        }
+        .code-block {
+            font-family: 'Courier New', monospace;
+            background-color: #2d3748;
+            color: #f7fafc;
+        }
+        .workflow-step {
+            position: relative;
+            padding-left: 2.5rem;
+        }
+        .workflow-step:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            background-color: #5b4dff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- 导航栏 -->
+    <nav class="terraform-bg text-white shadow-1g sticky top-0 z-10">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-layer-group text-white text-2xl"></i>
+                    <a href="#" class="text-xl font-bold">Terraform</a>
+                </div>
+                <div class="hidden md:flex space-x-8">
+					<a href="index.html" class="hover:text-purple-200">首页</a>
+                    <a href="#features" class="hover:text-purple-200">核心特性</a>
+                    <a href="#workflow" class="hover:text-purple-200">工作流程</a>
+                    <a href="#example" class="hover:text-purple-200">代码示例</a>
+                    <a href="#providers" class="hover:text-purple-200">云提供商</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-white focus:outline-none">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- 移动端菜单 -->
+            <div id="mobile-menu" class="hidden md:hidden mt-2 pb-2">
+                <a href="index.html" class="block py-2 hover:bg-purple-800 px-2 rounded">首页</a>
+                <a href="#features" class="block py-2 hover:bg-purple-800 px-2 rounded">核心特性</a>
+                <a href="#workflow" class="block py-2 hover:bg-purple-800 px-2 rounded">工作流程</a>
+                <a href="#example" class="block py-2 hover:bg-purple-800 px-2 rounded">代码示例</a>
+                <a href="#providers" class="block py-2 hover:bg-purple-800 px-2 rounded">云提供商</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 英雄区域 -->
+    <header class="terraform-bg text-white py-16">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6">基础设施即代码的未来</h1>
+            <p class="text-xl mb-8 max-w-3xl mx-auto">使用Terraform安全高效地构建、变更和版本控制基础设施</p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="#get-started" class="bg-white text-purple-800 px-6 py-3 rounded-lg font-bold hover:bg-gray-100 transition">快速入门</a>
+                <a href="https://developer.hashicorp.com/terraform/docs" target="_blank" class="border-2 border-white text-white px-6 py-3 rounded-lg font-bold hover:bg-purple-700 transition">官方文档</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主要内容区 -->
+    <main class="container mx-auto px-4 py-12">
+        <!-- 特性介绍 -->
+        <section id="features" class="mb-16">
+            <h2 class="text-3xl font-bold mb-12 text-center">Terraform核心优势</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="feature-card bg-white rounded-lg p-6 shadow-md transition-all duration-300">
+                    <div class="text-purple-600 mb-4">
+                        <i class="fas fa-code text-4xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">声明式配置</h3>
+                    <p class="text-gray-700">使用HCL语言描述基础设施状态，无需关心实现细节，自动计算资源依赖关系。</p>
+                </div>
+                <div class="feature-card bg-white rounded-lg p-6 shadow-md transition-all duration-300">
+                    <div class="text-purple-600 mb-4">
+                        <i class="fas fa-project-diagram text-4xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">多云编排</h3>
+                    <p class="text-gray-700">统一管理AWS、Azure、GCP等云平台资源，实现混合云架构部署。</p>
+                </div>
+                <div class="feature-card bg-white rounded-lg p-6 shadow-md transition-all duration-300">
+                    <div class="text-purple-600 mb-4">
+                        <i class="fas fa-history text-4xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">状态管理</h3>
+                    <p class="text-gray-700">记录基础设施状态变化，支持版本控制和团队协作，避免配置漂移。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 工作流程 -->
+        <section id="workflow" class="mb-16 bg-white rounded-lg shadow-md p-8">
+            <h2 class="text-3xl font-bold mb-8 text-center">Terraform标准工作流程</h2>
+            <div class="space-y-8">
+                <div class="workflow-step">
+                    <h3 class="text-xl font-bold mb-2">编写配置</h3>
+                    <p class="text-gray-700">使用HCL语言定义资源需求，模块化组织代码结构，支持变量和输出。</p>
+                </div>
+                <div class="workflow-step">
+                    <h3 class="text-xl font-bold mb-2">初始化</h3>
+                    <p class="text-gray-700">执行terraform init下载所需provider插件，准备后端存储。</p>
+                </div>
+                <div class="workflow-step">
+                    <h3 class="text-xl font-bold mb-2">计划预览</h3>
+                    <p class="text-gray-700">运行terraform plan生成执行计划，确认变更内容无误。</p>
+                </div>
+                <div class="workflow-step">
+                    <h3 class="text-xl font-bold mb-2">应用变更</h3>
+                    <p class="text-gray-700">执行terraform apply创建或更新基础设施，自动处理依赖关系。</p>
+                </div>
+                <div class="workflow-step">
+                    <h3 class="text-xl font-bold mb-2">销毁资源</h3>
+                    <p class="text-gray-700">通过terraform destroy清理不再需要的资源，避免费用浪费。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 代码示例 -->
+        <section id="example" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">Terraform配置示例</h2>
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <div class="p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-red-500 w-3 h-3 rounded-full mr-2"></div>
+                        <div class="bg-yellow-500 w-3 h-3 rounded-full mr-2"></div>
+                        <div class="bg-green-500 w-3 h-3 rounded-full mr-4"></div>
+                        <span class="text-gray-500 font-mono">main.tf</span>
+                    </div>
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code># 配置AWS提供商
+provider "aws" {
+  region = "us-west-2"
+}
+
+# 创建VPC网络
+resource "aws_vpc" "main" {
+  cidr_block = "10.0.0.0/16"
+  
+  tags = {
+    Name = "Production-VPC"
+  }
+}
+
+# 创建公共子网
+resource "aws_subnet" "public" {
+  vpc_id     = aws_vpc.main.id
+  cidr_block = "10.0.1.0/24"
+  
+  tags = {
+    Name = "Public-Subnet"
+  }
+}
+
+# 创建安全组
+resource "aws_security_group" "web" {
+  name        = "web-traffic"
+  description = "Allow HTTP/HTTPS traffic"
+  vpc_id      = aws_vpc.main.id
+
+  ingress {
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+
+# 输出VPC ID
+output "vpc_id" {
+  value = aws_vpc.main.id
+}</code></pre>
+                </div>
+                <div class="bg-gray-50 px-6 py-4 border-t border-gray-200">
+                    <div class="flex flex-wrap gap-4">
+                        <div class="flex items-center">
+                            <div class="bg-purple-100 p-2 rounded-full mr-3">
+                                <i class="fas fa-code text-purple-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">HCL语法</h4>
+                                <p class="text-sm text-gray-600">声明式配置语言，易读易维护</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="bg-blue-100 p-2 rounded-full mr-3">
+                                <i class="fas fa-link text-blue-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">资源依赖</h4>
+                                <p class="text-sm text-gray-600">自动解析资源间引用关系</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="bg-green-100 p-2 rounded-full mr-3">
+                                <i class="fas fa-tags text-green-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">标签管理</h4>
+                                <p class="text-sm text-gray-600">统一标记云资源</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 云提供商 -->
+        <section id="providers" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">支持的云平台</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="bg-white rounded-lg shadow-md p-6 text-center hover:shadow-lg transition">
+                    <img src="https://picsum.photos/100/100?random=aws" alt="AWS云平台" class="w-16 h-16 mx-auto mb-4 rounded-full">
+                    <h3 class="font-bold">AWS</h3>
+                    <p class="text-sm text-gray-600 mt-2">EC2, S3, RDS等全系列服务</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-6 text-center hover:shadow-lg transition">
+                    <img src="https://picsum.photos/100/100?random=azure" alt="Azure云平台" class="w-16 h-16 mx-auto mb-4 rounded-full">
+                    <h3 class="font-bold">Azure</h3>
+                    <p class="text-sm text-gray-600 mt-2">虚拟机、存储等资源管理</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-6 text-center hover:shadow-lg transition">
+                    <img src="https://picsum.photos/100/100?random=gcp" alt="Google云平台" class="w-16 h-16 mx-auto mb-4 rounded-full">
+                    <h3 class="font-bold">Google Cloud</h3>
+                    <p class="text-sm text-gray-600 mt-2">GCE, GKE等资源编排</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-6 text-center hover:shadow-lg transition">
+                    <img src="https://picsum.photos/100/100?random=alibaba" alt="阿里云平台" class="w-16 h-16 mx-auto mb-4 rounded-full">
+                    <h3 class="font-bold">阿里云</h3>
+                    <p class="text-sm text-gray-600 mt-2">ECS, VPC等国内云服务</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 快速开始 -->
+        <section id="get-started" class="mb-16 bg-white rounded-lg shadow-md p-8">
+            <h2 class="text-3xl font-bold mb-6 text-center">快速开始使用Terraform</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">安装Terraform</h3>
+                    <div class="bg-gray-800 text-gray-100 p-4 rounded-lg mb-4">
+                        <p class="font-mono"># MacOS使用Homebrew安装</p>
+                        <p class="font-mono">$ brew install terraform</p>
+                        <p class="font-mono"># 验证安装</p>
+                        <p class="font-mono">$ terraform -v</p>
+                    </div>
+                    <p class="text-gray-700 mb-4">支持多种平台安装：</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Windows</span>
+                        <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">Linux</span>
+                        <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm">MacOS</span>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">基本命令</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <p class="font-bold mb-1">初始化项目</p>
+                            <div class="bg-gray-800 text-gray-100 p-3 rounded-lg">
+                                <p class="font-mono">$ terraform init</p>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="font-bold mb-1">生成执行计划</p>
+                            <div class="bg-gray-800 text-gray-100 p-3 rounded-lg">
+                                <p class="font-mono">$ terraform plan</p>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="font-bold mb-1">应用变更</p>
+                            <div class="bg-gray-800 text-gray-100 p-3 rounded-lg">
+                                <p class="font-mono">$ terraform apply</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-layer-group text-purple-400 text-2xl"></i>
+                        <span class="text-xl font-bold">Terraform</span>
+                    </div>
+                    <p class="text-gray-400 mt-2">基础设施即代码的未来</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="https://github.com/penny1027" class="text-gray-400 hover:text-white"><i class="fab fa-github fa-lg"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter fa-lg"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-slack fa-lg"></i></a>
+                </div>
+            </div>
+            </div>
+        </div>
+    </footer>

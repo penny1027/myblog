@@ -1,194 +1,105 @@
+
 <!DOCTYPE html>
-<html lang="en">
-   <head>
-      <!-- basic -->
-      <meta charset="utf-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <!-- mobile metas -->
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-      <!-- site metas -->
-      <title>About</title>
-      <meta name="keywords" content="">
-      <meta name="description" content="">
-      <meta name="author" content="">
-      <!-- bootstrap css -->
-      <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-      <!-- style css -->
-      <link rel="stylesheet" type="text/css" href="css/style.css">
-      <!-- Responsive-->
-      <link rel="stylesheet" href="css/responsive.css">
-      <!-- fevicon -->
-      <link rel="icon" href="images/fevicon.png" type="image/gif" />
-      <!-- Scrollbar Custom CSS -->
-      <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
-      <!-- Tweaks for older IEs-->
-      <link rel="stylesheet" href="css/font-awesome.css">
-      <!-- owl stylesheets --> 
-      <link rel="stylesheet" href="css/owl.carousel.min.css">
-      <link rel="stylesheet" href="css/owl.theme.default.min.css">
-      <link rel="stylesheet" href="css/jquery.fancybox.min.css" media="screen">
-   </head>
-   <body>
-      <!--header section start -->
-      <div class="header_section header_bg">
-         <div class="container-fluid">
-               <div class="main">
-                  <div class="logo"><a href="index.html"><img src="images/logo.png"></a></div>
-                  <div class="menu_text">
-                     <ul>
-                        <div class="togle_">
-                           <div class="menu_main">
-                              <ul>
-                                 <li><a href="#">Login</a></li>
-                                 <li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>
-                              </ul>
-                           </div>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>关于我 - 个人主页</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .profile-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        .social-icon {
+            transition: all 0.3s ease;
+        }
+        .social-icon:hover {
+            transform: scale(1.2);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- 导航栏 -->
+    <nav class="gradient-bg text-white shadow-lg">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-user-circle text-2xl"></i>
+                    <span class="text-xl font-bold">关于我</span>
+                </div>
+                <div class="hidden md:flex space-x-6">
+                    <a href="index.html" class="hover:text-blue-200">首页</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主要内容区 -->
+    <main class="container mx-auto px-4 py-12">
+        <!-- 个人简介 -->
+        <section id="about" class="mb-16">
+            <div class="profile-card bg-white rounded-xl shadow-md overflow-hidden max-w-4xl mx-auto">
+                <div class="md:flex">
+                    <div class="md:w-1/3 p-6 flex justify-center">
+                        <img src="images/img.jpg" alt="个人头像" class="w-48 h-48 rounded-full object-cover border-4 border-white shadow-lg">
+                    </div>
+                    <div class="md:w-2/3 p-8">
+                        <h2 class="text-3xl font-bold mb-4">高级运维工程师</span></h2>
+                        <p class="text-gray-700 mb-6">10年Linux运维经验，专注云原生和自动化运维</p>
+                        
+                        <div class="flex flex-wrap gap-4 mb-6">
+                            <span class="bg-purple-100 text-purple-800 px-4 py-1 rounded-full">运维开发</span>
+                            <span class="bg-blue-100 text-blue-800 px-4 py-1 rounded-full">Devops实践</span>
+                            <span class="bg-green-100 text-green-800 px-4 py-1 rounded-full">技术写作</span>
+                            <span class="bg-yellow-100 text-yellow-800 px-4 py-1 rounded-full">开源贡献</span>
                         </div>
-                        <div id="myNav" class="overlay">
-                           <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-                           <div class="overlay-content">
-                              <a href="index.html">Home</a>
-                              <a href="protect.html">Protect</a>
-                              <a href="about.html">About</a>
-                              <a href="doctors.html">Doctors</a>
-                              <a href="news.html">News</a>
-                           </div>
+                        
+                        <div class="flex space-x-4">
+                            <a href="https://github.com/penny1027" class="social-icon text-gray-700 hover:text-blue-600">
+                                <i class="fab fa-github fa-lg"></i>
+                            </a>
+                            <a href="#" class="social-icon text-gray-700 hover:text-blue-400">
+                                <i class="fab fa-twitter fa-lg"></i>
+                            </a>
+                            <a href="#" class="social-icon text-gray-700 hover:text-red-600">
+                                <i class="fab fa-youtube fa-lg"></i>
+                            </a>
+                            <a href="#" class="social-icon text-gray-700 hover:text-green-600">
+                                <i class="fab fa-weixin fa-lg"></i>
+                            </a>
                         </div>
-                        <span class="navbar-toggler-icon"></span>
-                        <span onclick="openNav()"><img src="images/toogle-icon.png" class="toggle_menu"></span>
-                        <span onclick="openNav()"><img src="images/toogle-icon1.png" class="toggle_menu_1"></span>
-                     </ul>
-                  </div>
-               </div>
+                    </div>
+                </div>
             </div>
-            <!-- banner section start -->
-            <div class="container">
-               <div class="about_taital_main">
-                  <h2 class="about_tag">About Corona Virus</h2>
-                  <div class="about_menu">
-                     <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li>About</li>
-                     </ul>
-                  </div>
-               </div>
+        </section>
+
+        <!-- 公众号二维码 -->
+        <section id="contact" class="mb-16">
+            <div class="bg-white rounded-xl shadow-md p-8 max-w-md mx-auto">
+                <h2 class="text-2xl font-bold mb-6 text-center">关注我的公众号</h2>
+                <div class="flex justify-center mb-6">
+                    <img src="images/qrcode.jpg" alt="微信公众号二维码" class="w-48 h-48 border border-gray-200">
+                </div>
+                <p class="text-center text-gray-700 mb-4">扫描上方二维码，关注我的微信公众号</p>
+                <p class="text-center text-sm text-gray-500">获取更多技术分享和个人动态</p>
             </div>
-         <!-- banner section end -->
-      </div>
-      <!-- header section end -->
-      <!-- about section start -->
-      <div class="about_section layout_padding">
-         <div class="container">
-            <div class="row">
-               <div class="col-md-6">
-                  <div class="about_img"><img src="images/img-1.png"></div>
-               </div>
-               <div class="col-md-6">
-                  <h1 class="about_taital">Coronavirus what it is?</span></h1>
-                  <p class="about_text">when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using</p>
-                  <div class="read_bt"><a href="#">Read More</a></div>
-               </div>
+        </section>
+
+    <!-- 页脚 -->
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <div class="mt-4 flex justify-center space-x-6">
+                <a href="https://github.com/penny1027" class="text-gray-400 hover:text-white"><i class="fab fa-github"></i></a>
+                <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-linkedin"></i></a>
+                <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-weixin"></i></a>
             </div>
-         </div>
-      </div>
-      <!-- about section end -->
-      <!-- footer section start -->
-      <div class="footer_section layout_padding">
-         <div class="container">
-            <div class="footer_section_2">
-               <div class="row">
-                  <div class="col-lg-3 col-sm-6">
-                     <h2 class="useful_text">Resources</h2>
-                     <div class="footer_menu">
-                        <ul>
-                           <li><a href="#">What we do</a></li>
-                           <li><a href="#">Media</a></li>
-                           <li><a href="#">Travel Advice</a></li>
-                           <li><a href="#">Protection</a></li>
-                           <li><a href="#">Care</a></li>
-                        </ul>
-                     </div>
-                  </div>
-                  <div class="col-lg-3 col-sm-6">
-                     <h2 class="useful_text">About</h2>
-                     <p class="footer_text">Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various</p>
-                  </div>
-                  <div class="col-lg-3 col-sm-6">
-                     <h2 class="useful_text">Contact Us</h2>
-                     <div class="location_text">
-                        <ul>
-                           <li>
-                              <a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i>
-                              <span class="padding_15">Location</span></a>
-                           </li>
-                           <li>
-                              <a href="#"><i class="fa fa-phone" aria-hidden="true"></i>
-                              <span class="padding_15">Call +01 1234567890</span></a>
-                           </li>
-                           <li>
-                              <a href="#"><i class="fa fa-envelope" aria-hidden="true"></i>
-                              <span class="padding_15">demo@gmail.com</span></a>
-                           </li>
-                        </ul>
-                     </div>
-                  </div>
-                  <div class="col-lg-3 col-sm-6">
-                     <h2 class="useful_text">countrys</h2>
-                     <div class="map_image"><img src="images/map-bg.png"></div>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-      <!-- footer section end -->
-      <!-- copyright section start -->
-      <div class="copyright_section">
-         <div class="container">
-            <div class="row">
-               <div class="col-sm-12">
-                  <p class="copyright_text">Copyright &copy; 2020.Company name All rights reserved.<a target="_blank" href="http://sc.chinaz.com/moban/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a></p>
-               </div>
-            </div>
-         </div>
-      </div>
-      <!-- copyright section end -->
-      <!-- Javascript files-->
-      <script src="js/jquery.min.js"></script>
-      <script src="js/popper.min.js"></script>
-      <script src="js/bootstrap.bundle.min.js"></script>
-      <script src="js/jquery-3.0.0.min.js"></script>
-      <script src="js/plugin.js"></script>
-      <!-- sidebar -->
-      <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
-      <script src="js/custom.js"></script>
-      <!-- javascript --> 
-      <script src="js/owl.carousel.js"></script>
-      <script src="js/jquery.fancybox.min.js"></script>
-      <script>
-         $(document).ready(function(){
-         $(".fancybox").fancybox({
-         openEffect: "none",
-         closeEffect: "none"
-         });
-              
-         $(".zoom").hover(function(){
-              
-         $(this).addClass('transition');
-         }, function(){
-              
-         $(this).removeClass('transition');
-         });
-         });
-      </script> 
-      <script>
-         function openNav() {
-         document.getElementById("myNav").style.width = "100%";
-         }
-         function closeNav() {
-         document.getElementById("myNav").style.width = "0%";
-         }
-      </script>  
-   </body>
+        </div>
+    </footer>
+</body>
 </html>

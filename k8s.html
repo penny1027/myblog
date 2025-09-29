@@ -1,0 +1,320 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kubernetes - 容器编排自动化平台</title>
+	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .k8s-bg {
+            background: linear-gradient(135deg, #326ce5 0%, #1a3e8c 100%);
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+        }
+        .terminal {
+            font-family: 'Courier New', monospace;
+            background-color: #2d3748;
+            color: #f7fafc;
+        }
+        .architecture-step {
+            position: relative;
+            padding-left: 2.5rem;
+        }
+        .architecture-step:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            background-color: #326ce5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- 导航栏 -->
+    <nav class="k8s-bg text-white shadow-1g sticky top-0 z-10">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-ship text-white text-2xl"></i>
+                    <a href="#" class="text-xl font-bold">Kubernetes</a>
+                </div>
+                <div class="hidden md:flex space-x-8">
+				    <a href="index.html" class="hover:text-blue-200">首页</a>
+                    <a href="#features" class="hover:text-blue-200">核心特性</a>
+                    <a href="#architecture" class="hover:text-blue-200">架构原理</a>
+                    <a href="#commands" class="hover:text-blue-200">常用命令</a>
+                    <a href="#ecosystem" class="hover:text-blue-200">生态系统</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-white focus:outline-none">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- 移动端菜单 -->
+            <div id="mobile-menu" class="hidden md:hidden mt-2 pb-2">
+			    <a href="index.html" class="block py-2 hover:bg-blue-800 px-2 rounded">首页</a>
+                <a href="#features" class="block py-2 hover:bg-blue-800 px-2 rounded">核心特性</a>
+                <a href="#architecture" class="block py-2 hover:bg-blue-800 px-2 rounded">架构原理</a>
+                <a href="#commands" class="block py-2 hover:bg-blue-800 px-2 rounded">常用命令</a>
+                <a href="#ecosystem" class="block py-2 hover:bg-blue-800 px-2 rounded">生态系统</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 英雄区域 -->
+    <header class="k8s-bg text-white py-16">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6">容器编排自动化平台</h1>
+            <p class="text-xl mb-8 max-w-3xl mx-auto">使用Kubernetes自动化部署、扩展和管理容器化应用程序</p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="#get-started" class="bg-white text-blue-800 px-6 py-3 rounded-lg font-bold hover:bg-gray-100 transition">快速入门</a>
+                <a href="https://kubernetes.io/docs/home/" target="_blank" class="border-2 border-white text-white px-6 py-3 rounded-lg font-bold hover:bg-blue-700 transition">官方文档</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主要内容区 -->
+    <main class="container mx-auto px-4 py-12">
+        <!-- 特性介绍 -->
+        <section id="features" class="mb-16">
+            <h2 class="text-3xl font-bold mb-12 text-center">Kubernetes核心优势</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="feature-card bg-white rounded-lg p-6 shadow-md transition-all duration-300">
+                    <div class="text-blue-600 mb-4">
+                        <i class="fas fa-robot text-4xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">自动化部署</h3>
+                    <p class="text-gray-700">自动部署容器化应用，实现滚动更新和回滚，确保零停机部署。</p>
+                </div>
+                <div class="feature-card bg-white rounded-lg p-6 shadow-md transition-all duration-300">
+                    <div class="text-blue-600 mb-4">
+                        <i class="fas fa-expand text-4xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">弹性伸缩</h3>
+                    <p class="text-gray-700">根据CPU使用率或自定义指标自动扩展或缩减应用实例数量。</p>
+                </div>
+                <div class="feature-card bg-white rounded-lg p-6 shadow-md transition-all duration-300">
+                    <div class="text-blue-600 mb-4">
+                        <i class="fas fa-shield-alt text-4xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">自愈能力</h3>
+                    <p class="text-gray-700">自动重启失败的容器，替换不可用的节点，保持应用高可用性。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 架构原理 -->
+        <section id="architecture" class="mb-16 bg-white rounded-lg shadow-md p-8">
+            <h2 class="text-3xl font-bold mb-8 text-center">Kubernetes架构原理</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <img src="https://picsum.photos/600/400?random=k8s-architecture" alt="Kubernetes架构图" class="w-full rounded-lg shadow-md">
+                </div>
+                <div class="space-y-8">
+                    <div class="architecture-step">
+                        <h3 class="text-xl font-bold mb-2">控制平面</h3>
+                        <p class="text-gray-700">包含API Server、Scheduler、Controller Manager等组件，负责集群管理和决策。</p>
+                    </div>
+                    <div class="architecture-step">
+                        <h3 class="text-xl font-bold mb-2">工作节点</h3>
+                        <p class="text-gray-700">运行容器化应用，包含kubelet、kube-proxy和容器运行时等组件。</p>
+                    </div>
+                    <div class="architecture-step">
+                        <h3 class="text-xl font-bold mb-2">etcd</h3>
+                        <p class="text-gray-700">分布式键值存储，保存集群所有配置数据和状态信息。</p>
+                    </div>
+                    <div class="architecture-step">
+                        <h3 class="text-xl font-bold mb-2">网络模型</h3>
+                        <p class="text-gray-700">每个Pod获得唯一IP地址，Pod间可直接通信，无需NAT。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 常用命令 -->
+        <section id="commands" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">Kubernetes常用命令</h2>
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <div class="p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-red-500 w-3 h-3 rounded-full mr-2"></div>
+                        <div class="bg-yellow-500 w-3 h-3 rounded-full mr-2"></div>
+                        <div class="bg-green-500 w-3 h-3 rounded-full mr-4"></div>
+                        <span class="text-gray-500 font-mono">Terminal</span>
+                    </div>
+                    <pre class="terminal p-4 rounded-lg overflow-x-auto"><code># 查看集群信息
+kubectl cluster-info
+
+# 部署应用
+kubectl create deployment nginx --image=nginx
+
+# 查看Pod状态
+kubectl get pods
+
+# 查看服务
+kubectl get services
+
+# 扩展部署
+kubectl scale deployment nginx --replicas=3
+
+# 查看日志
+kubectl logs [pod-name]
+
+# 进入容器
+kubectl exec -it [pod-name] -- /bin/bash
+
+# 删除资源
+kubectl delete deployment nginx</code></pre>
+                </div>
+                <div class="bg-gray-50 px-6 py-4 border-t border-gray-200">
+                    <div class="flex flex-wrap gap-4">
+                        <div class="flex items-center">
+                            <div class="bg-blue-100 p-2 rounded-full mr-3">
+                                <i class="fas fa-terminal text-blue-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">kubectl</h4>
+                                <p class="text-sm text-gray-600">Kubernetes命令行工具</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="bg-green-100 p-2 rounded-full mr-3">
+                                <i class="fas fa-cube text-green-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">资源管理</h4>
+                                <p class="text-sm text-gray-600">部署、扩展、监控应用</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="bg-purple-100 p-2 rounded-full mr-3">
+                                <i class="fas fa-search text-purple-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">调试工具</h4>
+                                <p class="text-sm text-gray-600">日志查看、容器访问</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 生态系统 -->
+        <section id="ecosystem" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">Kubernetes生态系统</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="bg-white rounded-lg shadow-md p-6 text-center hover:shadow-lg transition">
+                    <img src="https://picsum.photos/100/100?random=helm" alt="Helm" class="w-16 h-16 mx-auto mb-4 rounded-full">
+                    <h3 class="font-bold">Helm</h3>
+                    <p class="text-sm text-gray-600 mt-2">Kubernetes包管理器</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-6 text-center hover:shadow-lg transition">
+                    <img src="https://picsum.photos/100/100?random=prometheus" alt="Prometheus" class="w-16 h-16 mx-auto mb-4 rounded-full">
+                    <h3 class="font-bold">Prometheus</h3>
+                    <p class="text-sm text-gray-600 mt-2">监控和告警系统</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-6 text-center hover:shadow-lg transition">
+                    <img src="https://picsum.photos/100/100?random=istio" alt="Istio" class="w-16 h-16 mx-auto mb-4 rounded-full">
+                    <h3 class="font-bold">Istio</h3>
+                    <p class="text-sm text-gray-600 mt-2">服务网格解决方案</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-6 text-center hover:shadow-lg transition">
+                    <img src="https://picsum.photos/100/100?random=argo" alt="Argo" class="w-16 h-16 mx-auto mb-4 rounded-full">
+                    <h3 class="font-bold">Argo</h3>
+                    <p class="text-sm text-gray-600 mt-2">持续交付和工作流引擎</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 快速开始 -->
+        <section id="get-started" class="mb-16 bg-white rounded-lg shadow-md p-8">
+            <h2 class="text-3xl font-bold mb-6 text-center">快速开始使用Kubernetes</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">安装Minikube</h3>
+                    <div class="bg-gray-800 text-gray-100 p-4 rounded-lg mb-4">
+                        <p class="font-mono"># MacOS使用Homebrew安装</p>
+                        <p class="font-mono">$ brew install minikube</p>
+                        <p class="font-mono"># 启动本地集群</p>
+                        <p class="font-mono">$ minikube start</p>
+                        <p class="font-mono"># 验证安装</p>
+                        <p class="font-mono">$ kubectl version</p>
+                    </div>
+                    <p class="text-gray-700 mb-4">其他安装方式：</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Windows</span>
+                        <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">Linux</span>
+                        <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm">Docker</span>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">部署第一个应用</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <p class="font-bold mb-1">创建部署</p>
+                            <div class="bg-gray-800 text-gray-100 p-3 rounded-lg">
+                                <p class="font-mono">$ kubectl create deployment nginx --image=nginx</p>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="font-bold mb-1">暴露服务</p>
+                            <div class="bg-gray-800 text-gray-100 p-3 rounded-lg">
+                                <p class="font-mono">$ kubectl expose deployment nginx --port=80</p>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="font-bold mb-1">访问应用</p>
+                            <div class="bg-gray-800 text-gray-100 p-3 rounded-lg">
+                                <p class="font-mono">$ minikube service nginx</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-ship text-blue-400 text-2xl"></i>
+                        <span class="text-xl font-bold">Kubernetes</span>
+                    </div>
+                    <p class="text-gray-400 mt-2">云原生计算的未来</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="https://github.com/penny1027" class="text-gray-400 hover:text-white"><i class="fab fa-github fa-lg"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter fa-lg"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-slack fa-lg"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 移动端菜单切换
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>
